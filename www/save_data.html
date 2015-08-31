@@ -13,8 +13,122 @@
 <link rel="stylesheet" href="css/framework7.css">
 <link rel="stylesheet" href="style.css">
 <link type="text/css" rel="stylesheet" href="css/swipebox.css" />
-<link rel="stylesheet" type="text/css" href="Font-Awesome-master/css/font-awesome.css">
-<link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
+
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+
+function get(name){
+    $('.lestsave').remove();
+    var inputs =  window.localStorage;
+    for (var key in inputs) {
+    if (inputs.hasOwnProperty(key)) {
+      if(key != "debug"){
+        $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+ eval('(' + inputs[key] + ')')['value'] + '</li>');
+        $('input').append();
+      }
+    }
+  }
+}
+
+function call(data,callback){
+
+    $.ajax({
+      method: "POST",
+      url: "http://sis.scfhs.org.sa/wsdl-json/index.php",
+      data: data
+        }).done(function( msg ) {
+            callback(msg);
+    });
+
+}
+
+function updatecase(){
+
+  var requestdata = {'service':'HSMobileApplicationServiceUpdateCaseValues'};
+
+  var storeddata = window.localStorage;
+
+  requestdata['App_spcMid_spcName'] = localStorage.getItem('app_mid_name');
+  requestdata['App_spcMid_spcName_spcE'] = localStorage.getItem('app_mid_name_e');
+  requestdata['App_spcRelegion'] = localStorage.getItem('app_relegion');
+  requestdata['App_spcMartial_spcStatus'] = localStorage.getItem('app_martial_status');
+  requestdata['App_spcNationality'] = localStorage.getItem('app_nationality');
+  requestdata['CaseId'] = localStorage.getItem('CaseId');
+  requestdata['App_spcEmail'] = localStorage.getItem('app_email');
+  requestdata['App_spcIqama_spcExpiry_spcDate_spcHijri'] = localStorage.getItem('app_iqama_expiry_date_hijri');
+  requestdata['App_spcFamily_spcName'] = localStorage.getItem('app_family_name');
+  requestdata['App_spcEmail_spcConfirm'] = localStorage.getItem('app_email');
+  requestdata['App_spcDoc_spcExpiry_spcDate'] = localStorage.getItem('app_doc_expiry_date');
+  requestdata['Job_spcType'] = localStorage.getItem('jop_type');
+  requestdata['Passport_spcExpiry_spcDate'] = localStorage.getItem('passport_expiry_date');
+  requestdata['App_spcMobile'] = localStorage.getItem('app_mobile');
+  requestdata['City'] = localStorage.getItem('city');
+  requestdata['App_spcPostal'] = localStorage.getItem('app_postal');
+  requestdata['App_spcThird_spcName'] = localStorage.getItem('app_third_name');
+  requestdata['App_spcFirst_spcName_spcE'] = localStorage.getItem('app_first_name_e');
+  requestdata['App_spcBirth_spcDt'] = localStorage.getItem('app_birth_dt');
+  requestdata['App_spcKSA_spcRegion'] = localStorage.getItem('app_ksa_region');
+  requestdata['App_spcPo_spcBox'] = localStorage.getItem('app_po_box');
+  requestdata['App_spcIqama_spcExpiry_spcDate'] = localStorage.getItem('app_iqama_expiry_date');
+  requestdata['CRS_spcNumber'] = localStorage.getItem('app_crs_number');
+  requestdata['Job_spcName'] = localStorage.getItem('jop_name');
+  requestdata['App_spcFirst_spcName'] = localStorage.getItem('app_first_name');
+  requestdata['Residance_spcNumber'] = localStorage.getItem('residance_number');
+  requestdata['ContactId'] = localStorage.getItem('ContactId');
+  requestdata['App_spcBirth_spcCty'] = localStorage.getItem('app_birth_cty');
+  requestdata['App_spcGender'] = localStorage.getItem('app_gender');
+  requestdata['Passport_spcExpiry_spcDate_spcHijri'] = localStorage.getItem('passport_expiry_date_hijri');
+  requestdata['App_spcThird_spcName_spcE'] = localStorage.getItem('app_third_name_e');
+  requestdata['App_spcFamily_spcName_spcE'] = localStorage.getItem('app_family_name_e');
+  requestdata['Passport_spcNumber'] = localStorage.getItem('passport_number');
+  requestdata['App_spcDoc_spcExpiry_spcDate_spcHijri'] = localStorage.getItem('app_doc_expiry_date_hijri');
+  requestdata['App_spcBirth_spcDt_spcHijri'] = localStorage.getItem('app_birth_dt_hijri');
+
+
+  console.log(requestdata);
+  call(requestdata,function(data){
+          var response = eval('(' + data + ')');
+          var response_data = response['Body']['HSMobileApplicationServiceCreateCase_Output'];
+          var result = response['Body']['HSMobileApplicationServiceCreateCase_Output']['Result'];
+          if(result == "true"){
+              console.log(response_data);
+              //window.location.href = "code.html";
+          }else{
+              $('#LoginForm').append('<p class="error">Error</p>');
+          }
+      });
+
+}
+
+$(document).ready(function(){
+
+  try{
+    get();
+  }catch(e){
+    console.log(e);
+  }
+
+  $('.undo').click(function(){
+    window.location.href = "reg_from.html";
+  });
+
+  $('.submit_form').click(function(){
+    updatecase();
+    //window.location.href = "code.html";
+  });
+
+  $('.open-panel').click(function(){
+    window.location.href = "code.html";
+  });
+
+});
+
+
+function goBack() {
+    window.history.back();
+}
+
+</script>
 </head>
     <div class="statusbar-overlay"></div>
 
@@ -42,27 +156,14 @@
   </div>
 </div>
 
-<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="js/save.js"></script>   
+
+
 <script type="text/javascript" src="js/jquery.validate.min.js" ></script>
 <script type="text/javascript" src="js/framework7.min.js"></script>
 <script type="text/javascript" src="js/my-app.js"></script>
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>
 <script type="text/javascript" src="js/jquery.fitvids.js"></script>
 <script type="text/javascript" src="js/email.js"></script>
-<script type="text/javascript">
-$('.undo').click(function(){
-  window.location = "reg_from.html";
-});
-$('.submit_form').click(function(){
-  window.location = "code.html";
-});
-$('.open-panel').click(function(){
-  window.location = "code.html";
-});
-function goBack() {
-    window.history.back();
-}
-</script>
+
   </body>
 </html>

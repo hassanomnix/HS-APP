@@ -11,11 +11,89 @@
 <link rel="stylesheet" href="css/framework7.css">
 <link rel="stylesheet" href="style.css">
 <link type="text/css" rel="stylesheet" href="css/swipebox.css" />
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="Font-Awesome-master/css/font-awesome.css">
-<link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
-<link rel="stylesheet" href="bootflat.github.io-master/css/site.min.css">
-<link rel="stylesheet" href="bootflat.github.io-master/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script>
+    
+        $(document).ready(function(){
+           
+
+            function call(data,callback){
+              /*
+                  Call Service Via Ajax
+              */
+                $.ajax({
+                  method: "POST",
+                  url: "http://sis.scfhs.org.sa/wsdl-json/index.php",
+                  data: data
+                    }).done(function( msg ) {
+                        callback(msg);
+                });
+
+            }
+            
+            function saveresponse(obj){
+                /*
+
+                  Save Response To localStorage
+
+                */
+                var inputs =  obj;
+                for (var key in inputs) {
+                if (inputs.hasOwnProperty(key)) {
+                    
+                       localStorage.setItem(key,inputs[key]);
+                    
+                  }
+                }
+            }
+
+
+            // Search Button answer.html
+            $('body').on('click','#search-button-answer',function(){
+                
+                // Fetch Search Number
+                var searchnumber = $('input.serach_number').val();
+
+                // Cave CRS
+                localStorage.setItem('App_spcCrs_spcNumber',searchnumber);
+
+
+                // Call Service 
+                call({'service':'HSMobileApplicationServiceCreateCase','RegistrationNumber':searchnumber},function(data){
+
+                    // Parse Response 
+                    var response = eval('(' + data + ')');
+                    var response_data = response['Body']['HSMobileApplicationServiceCreateCase_Output'];
+                    var result = response['Body']['HSMobileApplicationServiceCreateCase_Output']['Result'];
+                    if(result == "true"){
+
+                        localStorage.setItem('CaseId',response_data['CaseId']);
+                        localStorage.setItem('ContactId',response_data['ContactId']);
+                        // Save Result
+                        saveresponse(response_data);
+
+                        //Check User Nationality
+                        if(response_data['App_spcNationality'] == "المملكة العربية السعودية"){
+                          window.location.href = "reg_from.html";
+                        }else{
+                          window.location.href = "reg_from.html";
+                        }
+                        
+                    }else{
+
+                        // CRS Not Avalibale
+                        $('#LoginForm').append('<p class="error">رقم التسجيل غير موجود</p>');
+
+                    }
+                });
+
+            });
+        
+        
+        });
+        
+    </script>
 </head>
 <body id="mobile_wrap">
 
@@ -45,7 +123,7 @@
                     <div class="input-group-serach">
                       
                       <input type="text" class="serach_number" placeholder="رقم التسجيل المهني:">
-                      <a href="reg_from.html" class="serach_number_btn" style="">بحث <i class="fa fa-search"></i></a>
+                      <a href="#" id="search-button-answer" class="serach_number_btn" style="">بحث <i class="fa fa-search"></i></a>
 
                     </div>
 
@@ -63,7 +141,7 @@
 </div>
 
     
-<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+
 <script src="js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/framework7.min.js"></script>
 <script type="text/javascript" src="js/my-app.js"></script>

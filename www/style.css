@@ -458,7 +458,7 @@ background-size: 100%;
 background-size: cover;
 }
 #pages_maincontent{
-width:100%;
+/* width:100%; */
 padding:30px 5% 30px 5%;
 margin:0px;
 position: absolute; 
