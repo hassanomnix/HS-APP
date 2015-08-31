@@ -13,7 +13,38 @@
 <link rel="stylesheet" href="css/framework7.css">
 <link rel="stylesheet" href="style.css">
 <link type="text/css" rel="stylesheet" href="css/swipebox.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style type="text/css">
+.error{
+  padding:10px;
+  display: block;
+  color:red;
+  font-weight: bold;
+  text-align: center;
+  clear:both;
+  margin-top: 25px;
+  background-color: #D8B0B0;
+  border: 1px solid red;
+  width: 98%;
+}
 
+.load{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999999999999;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0.8;
+
+}
+
+.load img {
+  margin: 0 auto;
+  margin-top:40%;
+}
+</style>
 <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
 
@@ -22,8 +53,9 @@ function get(name){
     var inputs =  window.localStorage;
     for (var key in inputs) {
     if (inputs.hasOwnProperty(key)) {
-      if(key != "debug"){
-        $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+eval('(' + inputs[key] + ')')['name']+' : '+ eval('(' + inputs[key] + ')')['value'] + '</li>');
+
+      if(key != "debug" && '1234567890'.indexOf(key) >= 0 ){
+        $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+ eval('(' + inputs[key] + ')')['value'] + '</li>');
         $('input').append();
       }
     }
@@ -88,14 +120,28 @@ function updatecase(){
   console.log(requestdata);
   call(requestdata,function(data){
           var response = eval('(' + data + ')');
+          console.log(response);
           var response_data = response['Body']['HSMobileApplicationServiceCreateCase_Output'];
-          var result = response['Body']['HSMobileApplicationServiceCreateCase_Output']['Result'];
-          if(result == "true"){
+          var result = response['Body'];
+          if(typeof result['Fault'] != "undefined"){
+
+              $('.load').fadeOut('slow');
+
+              var error = result['Fault']['faultstring'];
+              
+              $('.page_single').append('<div class="error"> '+error+' <i class="fa fa-exclamation"></i></div>');
+
+          }else{
+            var result = response['Body']['HSMobileApplicationServiceCreateCase_Output']['Result'];
+             if(result == "true"){
               console.log(response_data);
               //window.location.href = "code.html";
-          }else{
-              $('#LoginForm').append('<p class="error">Error</p>');
+            }else{
+                $('#LoginForm').append('<p class="error">Error</p>');
+            }
+
           }
+         
       });
 
 }
@@ -113,6 +159,7 @@ $(document).ready(function(){
   });
 
   $('.submit_form').click(function(){
+    $('.load').fadeIn('slow');
     updatecase();
     //window.location.href = "code.html";
   });
@@ -164,6 +211,8 @@ function goBack() {
 <script type="text/javascript" src="js/jquery.swipebox.js"></script>
 <script type="text/javascript" src="js/jquery.fitvids.js"></script>
 <script type="text/javascript" src="js/email.js"></script>
-
+ <div class="load" style="display:none">
+                   <center> <img   src="images/360.GIF"/></center>
+                    </div>
   </body>
 </html>
