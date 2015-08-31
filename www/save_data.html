@@ -23,7 +23,7 @@ function get(name){
     for (var key in inputs) {
     if (inputs.hasOwnProperty(key)) {
       if(key != "debug"){
-        $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+ eval('(' + inputs[key] + ')')['value'] + '</li>');
+        $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+eval('(' + inputs[key] + ')')['name']+' : '+ eval('(' + inputs[key] + ')')['value'] + '</li>');
         $('input').append();
       }
     }
