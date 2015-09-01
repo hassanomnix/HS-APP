@@ -53,8 +53,9 @@ function get(name){
     var inputs =  window.localStorage;
     for (var key in inputs) {
     if (inputs.hasOwnProperty(key)) {
-
-      if(key != "debug" && '1234567890'.indexOf(key) >= 0 ){
+console.log(key);
+      if(key != "debug" && '1234567890101112131415161718192021222324252627282930'.indexOf(key) >= 0 ){
+        console.log(key);
         $('ul').append('<li data-id="'+eval('(' + inputs[key] + ')')['name']+'" class="lestsave">'+ eval('(' + inputs[key] + ')')['value'] + '</li>');
         $('input').append();
       }
@@ -102,7 +103,7 @@ function updatecase(){
   requestdata['App_spcKSA_spcRegion'] = localStorage.getItem('app_ksa_region');
   requestdata['App_spcPo_spcBox'] = localStorage.getItem('app_po_box');
   requestdata['App_spcIqama_spcExpiry_spcDate'] = localStorage.getItem('app_iqama_expiry_date');
-  requestdata['CRS_spcNumber'] = localStorage.getItem('app_crs_number');
+  requestdata['CRS_spcNumber'] = localStorage.getItem('crs_number');
   requestdata['Job_spcName'] = localStorage.getItem('jop_name');
   requestdata['App_spcFirst_spcName'] = localStorage.getItem('app_first_name');
   requestdata['Residance_spcNumber'] = localStorage.getItem('residance_number');
@@ -119,9 +120,11 @@ function updatecase(){
 
   console.log(requestdata);
   call(requestdata,function(data){
+
+          $('.error').remove();
           var response = eval('(' + data + ')');
           console.log(response);
-          var response_data = response['Body']['HSMobileApplicationServiceCreateCase_Output'];
+          var response_data = response['Body']['HSMobileApplicationServiceUpdateCaseValues_Output'];
           var result = response['Body'];
           if(typeof result['Fault'] != "undefined"){
 
@@ -132,12 +135,31 @@ function updatecase(){
               $('.page_single').append('<div class="error"> '+error+' <i class="fa fa-exclamation"></i></div>');
 
           }else{
-            var result = response['Body']['HSMobileApplicationServiceCreateCase_Output']['Result'];
+           
+            var result = response['Body']['HSMobileApplicationServiceUpdateCaseValues_Output']['Result'];
              if(result == "true"){
-              console.log(response_data);
-              //window.location.href = "code.html";
+              if(response_data['ErrorCode'] == "ValidationError"){
+
+                $('.page_single').append('<div class="error"> '+response_data['ErrorDescription']+' <i class="fa fa-exclamation"></i></div>');
+                $('.load').fadeOut('slow');
+
+              }else{
+
+
+                call({'service':'HSMobileApplicationServiceSubmitCase','CaseId':localStorage.getItem('CaseId')},function(data){
+
+                    var response = eval('(' + data + ')');
+                    var SerialNumber = response['Body']['HSMobileApplicationServiceSubmitCase_Output']['SerialNumber'];
+                    localStorage.setItem('SerialNumber',SerialNumber);
+                    window.location.href = "code.html";
+                });
+
+              }
+              
             }else{
-                $('#LoginForm').append('<p class="error">Error</p>');
+              var error = response['Body']['HSMobileApplicationServiceUpdateCaseValues_Output']['ErrorDescription'];
+                $('.page_single').append('<div class="error"> '+error+' <i class="fa fa-exclamation"></i></div>');
+                $('.load').fadeOut('slow');
             }
 
           }
