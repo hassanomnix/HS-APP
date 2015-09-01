@@ -190,7 +190,8 @@
 
        
        $region.change(function(){
-       		$cityoption.remove();
+       		console.log('tt');
+       		$('select[name="app_ksa_region"] option').remove();
        		var value = $(this).val();
 			$city.append(cities[value]);
        });
