@@ -24,13 +24,184 @@
 
 <link type="text/css" rel="stylesheet" href="css/swipebox.css" />
 
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="Font-Awesome-master/css/font-awesome.css">
 
-<link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="bootflat.github.io-master/css/site.min.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+
+<script>
+
+  var cities = {
+    'المنطقة الشرقية':'<option value="محافظة ابقيق">محافظة ابقيق</option><option value="محافظة الأحساء">محافظة الأحساء</option><option value="محافظة الجبيل">محافظة الجبيل</option><option value="محافظة الخبر">محافظة الخبر</option><option value="محافظة الخفجي">محافظة الخفجي</option><option value="محافظة القطيف">محافظة القطيف</option><option value="محافظة النعيرية">محافظة النعيرية</option><option value="محافظة حفر الباطن">محافظة حفر الباطن</option><option value="محافظة رأس تنورة">محافظة رأس تنورة</option><option value="محافظة قرية العليا">محافظة قرية العليا</option><option value="مدينة الدمام">مدينة الدمام</option>',
+    'منطقة الباحة':'<option value="محافظة العقيق">محافظة العقيق</option><option value="محافظة القرى">محافظة القرى</option><option value="محافظة المخواة">محافظة المخواة</option><option value="محافظة المندق">محافظة المندق</option><option value="محافظة بالجرشي">محافظة بالجرشي</option><option value="محافظة قلوة">محافظة قلوة</option><option value="مدينة الباحة">مدينة الباحة</option>',
+    'منطقة الجوف':'<option value="محافظة القريات">محافظة القريات</option><option value="محافظة بسيطاء">محافظة بسيطاء</option><option value="محافظة دومة الجندل">محافظة دومة الجندل</option><option value="مدينة سكاكا">مدينة سكاكا</option>',
+    'منطقة الحدود الشمالية':'<option value="محافظة رفحاء">محافظة رفحاء</option><option value="محافظة طريف">محافظة طريف</option><option value="مدينة عرعر">مدينة عرعر</option>',
+    'منطقة الرياض':'<option value="محافظة الأفلاج">محافظة الأفلاج</option><option value="محافظة الحريق">محافظة الحريق</option><option value="محافظة الخرج">محافظة الخرج</option><option value="محافظة الدرعية">محافظة الدرعية</option><option value="محافظة الدوادمي">محافظة الدوادمي</option><option value="محافظة الزلفي">محافظة الزلفي</option><option value="محافظة السليل">محافظة السليل</option><option value="محافظة الغاط">محافظة الغاط</option><option value="محافظة القويعية">محافظة القويعية</option><option value="محافظة المجمعة">محافظة المجمعة</option><option value="محافظة المزاحمية">محافظة المزاحمية</option><option value="محافظة ثادق">محافظة ثادق</option><option value="محافظة حريملاء">محافظة حريملاء</option><option value="محافظة حوطة بني تميم">محافظة حوطة بني تميم</option><option value="محافظة رماح">محافظة رماح</option><option value="محافظة شقراء">محافظة شقراء</option><option value="محافظة ضرماء">محافظة ضرماء</option><option value="محافظة عفيف">محافظة عفيف</option><option value="محافظة وادي الدواسر">محافظة وادي الدواسر</option><option value="مدينة الرياض">مدينة الرياض</option>',
+    'منطقة القصيم':'<option value="محافظة الأسياح">محافظة الأسياح</option><option value="محافظة البدائع">محافظة البدائع</option><option value="محافظة البكيرية">محافظة البكيرية</option><option value="محافظة الرس">محافظة الرس</option><option value="محافظة الشماسية">محافظة الشماسية</option><option value="محافظة المذنب">محافظة المذنب</option><option value="محافظة النبهانية">محافظة النبهانية</option><option value="محافظة رياض الخبراء">محافظة رياض الخبراء</option><option value="محافظة عنيزة">محافظة عنيزة</option><option value="محافظة عيون الجواء">محافظة عيون الجواء</option><option value="مدينة بريدة">مدينة بريدة</option>',
+    'منطقة المدينة المنورة':'<option value="محافظة الحناكية">محافظة الحناكية</option><option value="محافظة العلا">محافظة العلا</option><option value="محافظة المهد">محافظة المهد</option><option value="محافظة بدر">محافظة بدر</option><option value="محافظة خيبر">محافظة خيبر</option><option value="محافظة ينبع">محافظة ينبع</option><option value="مدينة المدينة المنورة">مدينة المدينة المنورة</option>',
+    'منطقة تبوك':'<option value="محافظة أملج">محافظة أملج</option><option value="محافظة الوجه">محافظة الوجه</option><option value="محافظة تيماء">محافظة تيماء</option><option value="محافظة حقل">محافظة حقل</option><option value="محافظة ضباء">محافظة ضباء</option><option value="مدينة تبوك">مدينة تبوك</option>',
+    'منطقة جازان':'<option value="محافظة أبو عريش">محافظة أبو عريش</option><option value="محافظة أحد المسارحة">محافظة أحد المسارحة</option><option value="محافظة الحرث">محافظة الحرث</option><option value="محافظة الدائر">محافظة الدائر</option><option value="محافظة الدرب">محافظة الدرب</option><option value="محافظة الريث">محافظة الريث</option><option value="محافظة العارضة">محافظة العارضة</option><option value="محافظة العيدابي">محافظة العيدابي</option><option value="محافظة بيش">محافظة بيش</option><option value="محافظة صامطة">محافظة صامطة</option><option value="محافظة صبياء">محافظة صبياء</option><option value="محافظة ضمد">محافظة ضمد</option><option value="محافظة فرسان">محافظة فرسان</option><option value="مدينة جازان">مدينة جازان</option>',
+    'منطقة حائل':'<option value="محافظة الشنان">محافظة الشنان</option><option value="محافظة الغزالة">محافظة الغزالة</option><option value="محافظة بقعاء">محافظة بقعاء</option><option value="مدينة حائل">مدينة حائل</option>',
+    'منطقة عسير':'<option value="محافظة أحد رفيدة">محافظة أحد رفيدة</option><option value="محافظة المجاردة">محافظة المجاردة</option><option value="محافظة النماص">محافظة النماص</option><option value="محافظة بلقرن">محافظة بلقرن</option><option value="محافظة بيشة">محافظة بيشة</option><option value="محافظة تثليث">محافظة تثليث</option><option value="محافظة خميس مشيط">محافظة خميس مشيط</option><option value="محافظة رجال ألمع">محافظة رجال ألمع</option><option value="محافظة سراة عبيدة">محافظة سراة عبيدة</option><option value="محافظة ظهران الجنوب">محافظة ظهران الجنوب</option><option value="محافظة محايل عسير">محافظة محايل عسير</option><option value="مدينة أبها">مدينة أبها</option>',
+    'منطقة مكة المكرمة':'<option value="محافظة الجموم">محافظة الجموم</option><option value="محافظة الخرمة">محافظة الخرمة</option><option value="محافظة الطائف">محافظة الطائف</option><option value="محافظة القنفذة">محافظة القنفذة</option><option value="محافظة الكامل">محافظة الكامل</option><option value="محافظة الليث">محافظة الليث</option><option value="محافظة تربة">محافظة تربة</option><option value="محافظة جدة">محافظة جدة</option><option value="محافظة خليص">محافظة خليص</option><option value="محافظة رابغ">محافظة رابغ</option><option value="محافظة رنية">محافظة رنية</option><option value="مدينة مكة المكرمة">مدينة مكة المكرمة</option>',
+    'منطقة نجران':'<option value="محافظة الخرخير">محافظة الخرخير</option><option value="محافظة بدر الجنوب">محافظة بدر الجنوب</option><option value="محافظة ثار">محافظة ثار</option><option value="محافظة حبونا">محافظة حبونا</option><option value="محافظة خباش">محافظة خباش</option><option value="محافظة شرورة">محافظة شرورة</option><option value="محافظة يدمة">محافظة يدمة</option><option value="مدينة نجران">مدينة نجران</option>'
+  };    
+
+
+    function capitalizeFirstLetter(string) {
+
+        return string.charAt(0).toUpperCase() + string.slice(1);
+
+    }
+
+
+    
+
+    function appendresponse(){
+
+        var inputs =  window.localStorage;
+
+        
+
+        for (var key in inputs) {
+
+        if (inputs.hasOwnProperty(key)) {
+
+
+
+             var element_name = key.split('_');
+
+            
+
+             for (var i = element_name.length - 1; i >= 0; i--) {
+
+              
+
+                  if(element_name[i] == 'App'){
+
+                      element_name[i] = 'App';
+
+                  }else{
+
+                      element_name[i] = 'spc' + capitalizeFirstLetter(element_name[i]);
+
+                  }
+
+             };
+
+                   
+
+                element_name = key.replace(/spc/g,'').toLowerCase();
+
+                
+
+                 if(inputs[key] != "[object Object]"){
+
+                    $('[name="'+element_name+'"]').val(inputs[key]);
+
+                 }
+
+
+
+          }
+
+        }
+
+    }
+
+    
+
+      function store(){
+
+       //localStorage.clear();
+
+        var $inputs = $('input[type="text"],input[type="email"],input[type="number"],select');
+        var i = 0;
+
+        $inputs.each(function(){
+
+            var name = $(this).attr('name');
+
+            
+
+            var value = $(this).val();
+
+            var order = i;
+
+            
+            
+
+            var itemdata = {};
+
+            itemdata['value'] = value;
+
+            itemdata['name'] = name;
+
+            window.localStorage.setItem(name,value);
+
+            var saved = window.localStorage.setItem(order,JSON.stringify(itemdata));
+
+            i++;
+
+
+
+        });
+
+    }
+
+
+
+
+
+    
+
+    $(document).ready(function(){
+
+
+
+        appendresponse();
+
+       var $city = $('select[name="app_ksa_region"]');
+
+       var $cityoption = $('select[name="app_ksa_region"] option');
+       var $region = $('select[name="city"]');
+       $city.append(cities[$region.val()]);
+
+
+
+       $('.review_of_data_btn').show();
+
+       $('.review_of_data_btn').click(function(){
+
+
+
+            store();
+
+            localStorage.setItem('page','reg_from_non.html');
+            window.location.href = "save_data.html";
+
+
+
+        });
+
+       
+       $region.change(function(){
+          console.log('tt');
+          $('select[name="app_ksa_region"] option').remove();
+          var value = $(this).val();
+      $city.append(cities[value]);
+       });
+
+
+
+
+
+
+
+    });
+
+</script>
 
   </head>
 
@@ -72,325 +243,296 @@
 
                         <div class="custom-accordion accordion-list">
 
-                        <div class="accordion-item">
+                       <div class="accordion-item">
 
-                            <div class="accordion-item-toggle">
+                  <div class="accordion-item-toggle">
 
-<i class="icon-plus"><i class="fa fa-plus-square-o fa-lg"></i></i>
+                    <i class="icon-plus"><i class="fa fa-plus-square-o fa-lg"></i></i>
 
-    <i class="icon-minus"><i class="fa fa-minus-square-o fa-lg"></i></i>
+                    <i class="icon-minus"><i class="fa fa-minus-square-o fa-lg"></i></i>
 
-                              <span class="spantexttitle" >خدمة فتح حساب</span>
+                    <span class="spantexttitle">معلومات الممارس</span>
 
-                            </div>
+                  </div>
 
-      <div class="accordion-item-content">
+            <div class="accordion-item-content">
 
-        <form id="LoginForm" >
 
-          <div class="input-group-reg">
 
-            <label>رقم مرجعية الطلب: <i class="fa fa-star"></i></label>
+      <form id="LoginForm">
 
-            <input type="text" class="form-control" disabled="" placeholder="رقم مرجعية الطلب"/>
 
-          </div>
 
-        </form> 
+        <!--<div class="input-group-reg">
 
-      </div>  
+        <label>رقم التسجيل المهني: <i class="fa fa-star"></i></label>
 
-</div>   
+        <input type="text" data-order="0" class="input_def"  name="app_crs_number" placeholder="Text input">
 
-                          <div class="accordion-item">
+        </div>-->
 
-                            <div class="accordion-item-toggle">
+        <div class="input-group-reg">
 
-<i class="icon-plus"><i class="fa fa-plus-square-o fa-lg"></i></i>
+        <label>الاسم الاول عربي: <i class="fa fa-star"></i></label>
 
-    <i class="icon-minus"><i class="fa fa-minus-square-o fa-lg"></i></i>
+        <input type="text" name="app_first_name" class="input_def" placeholder="الاسم الاول عربي" data-order="1">
 
-    <span class="spantexttitle">بيانات جهة العمل</span>
+        </div>
 
-                            </div>
+        <div class="input-group-reg">
 
-      <div class="accordion-item-content">
+        <label>اسم الأب عربي: <i class="fa fa-star"></i></label>
 
-       <form id="LoginForm">
+        <input type="text" name="app_mid_name" class="input_def" placeholder="اسم الأب عربي" data-order="2">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>رقم مرجعية الطلب: </label>
+        <div class="input-group-reg">
 
-              <input type="text" data-order="0" class="form-control" disabled="" name="" placeholder="Text input">
+        <label>اسم الجد عربي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_third_name" class="input_def" placeholder="اسم الجد عربي" data-order="3">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>الاسم الاول عربي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_first_name" class="input_def" placeholder="الاسم الاول عربي" data-order="1">
+        <label>اسم العائلة عربي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_family_name" class="input_def" placeholder="اسم العائلة عربي" data-order="4">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>اسم الأب عربي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_mid_name" class="input_def" placeholder="اسم الأب عربي" data-order="2">
+        <label>الاسم الاول إنجليزي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_first_name_e" class="input_def" placeholder="الاسم الاول إنجليزي" data-order="5">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>اسم الجد عربي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_third_name" class="input_def" placeholder="اسم الجد عربي" data-order="3">
+        <label>اسم الأب إنجليزي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_mid_name_e" class="input_def" placeholder="اسم الأب إنجليزي" data-order="6">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>اسم العائلة عربي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_family_name" class="input_def" placeholder="اسم العائلة عربي" data-order="4">
+        <label>اسم الجد إنجليزي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_third_name_e" class="input_def" placeholder="اسم الجد إنجليزي" data-order="7">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>الاسم الاول إنجليزي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_first_name_e" class="input_def" placeholder="الاسم الاول إنجليزي" data-order="5">
+        <label>اسم العائلة إنجليزي: <i class="fa fa-star"></i></label>
 
-            </div>
+        <input type="text" name="app_family_name_e" class="input_def" placeholder="اسم العائلة إنجليزي" data-order="8">
 
-            <div class="input-group-reg">
+        </div>
 
-              <label>اسم الأب إنجليزي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <input type="text" name="app_mid_name_e" class="input_def" placeholder="اسم الأب إنجليزي" data-order="6">
+        <label>مكان الميلاد: <i class="fa fa-star"></i></label>
 
-            </div>
-
-            <div class="input-group-reg">
-
-              <label>اسم الجد إنجليزي: <i class="fa fa-star"></i></label>
-
-              <input type="text" name="app_third_name_e" class="input_def" placeholder="اسم الجد إنجليزي" data-order="7">
-
-            </div>
-
-            <div class="input-group-reg">
-
-              <label>اسم العائلة إنجليزي: <i class="fa fa-star"></i></label>
-
-              <input type="text" name="app_family_name_e" class="input_def" placeholder="اسم العائلة إنجليزي" data-order="8">
-
-            </div>
-
-            <div class="input-group-reg">
-
-              <label>مكان الميلاد: <i class="fa fa-star"></i></label>
-
-              <select name="country" id="country" class="select_def">
-
+        <select name="app_birth_cty" id="country" class="select_def" >
                   <option value="0" label="أختار .. " selected="selected">أختار .. </option>
+<option value="السويد"> السويد  </option>
+<option value="آيسلندا"> آيسلندا  </option>
+<option value="أثيوبيا"> أثيوبيا  </option>
+<option value="أذربيجان"> أذربيجان  </option>
+<option value="أرمينيا"> أرمينيا  </option>
+<option value="أسبانيا"> أسبانيا  </option>
+<option value="أستونيا"> أستونيا  </option>
+<option value="أفغانستان"> أفغانستان  </option>
+<option value="ألبانيا"> ألبانيا  </option>
+<option value="ألمانيا"> ألمانيا  </option>
+<option value="أنجولا"> أنجولا  </option>
+<option value="أندونيسيا"> أندونيسيا  </option>
+<option value="أورجواي"> أورجواي  </option>
+<option value="أوزبكستان"> أوزبكستان  </option>
+<option value="أوغندا"> أوغندا  </option>
+<option value="إريتريا"> إريتريا  </option>
+<option value="إكوادور"> إكوادور  </option>
+<option value="استراليا"> استراليا  </option>
+<option value="اسرائيل"> اسرائيل  </option>
+<option value="اسكتلندا"> اسكتلندا  </option>
+<option value="الأردن"> الأردن  </option>
+<option value="الأمارات العربية المتحده"> الأمارات العربية المتحده  </option>
+<option value="الارجنتين"> الارجنتين  </option>
+<option value="البحرين"> البحرين  </option>
+<option value="البرازيل"> البرازيل  </option>
+<option value="البرتغال"> البرتغال  </option>
+<option value="البوسنة والهرسك"> البوسنة والهرسك  </option>
+<option value="الجبل الاسود"> الجبل الاسود  </option>
+<option value="الجزائر"> الجزائر  </option>
+<option value="الدنمارك"> الدنمارك  </option>
+<option value="السلفادور"> السلفادور  </option>
+<option value="السنغال"> السنغال  </option>
+<option value="الصومال"> الصومال  </option>
+<option value="الصين الشعبيه"> الصين الشعبيه  </option>
+<option value="العراق"> العراق  </option>
+<option value="الفلبين"> الفلبين  </option>
+<option value="الكاميرون"> الكاميرون  </option>
+<option value="الكويت"> الكويت  </option>
+<option value="المجر"> المجر  </option>
+<option value="المغرب"> المغرب  </option>
+<option value="المكسيك"> المكسيك  </option>
+<option value="المملكة العربية السعودية"> المملكة العربية السعودية  </option>
+<option value="المملكة المتحدة"> المملكة المتحدة  </option>
+<option value="النرويج"> النرويج  </option>
+<option value="النمسا"> النمسا  </option>
+<option value="النيجر"> النيجر  </option>
+<option value="الهند"> الهند  </option>
+<option value="الولايات المتحدة الأمريكيه"> الولايات المتحدة الأمريكيه  </option>
+<option value="اليابان"> اليابان  </option>
+<option value="اليمن"> اليمن  </option>
+<option value="اليونان"> اليونان  </option>
+<option value="اوكرانيا"> اوكرانيا  </option>
+<option value="ايران"> ايران  </option>
+<option value="ايرلندا"> ايرلندا  </option>
+<option value="ايطاليا"> ايطاليا  </option>
+<option value="باراجواي"> باراجواي  </option>
+<option value="باربادوس"> باربادوس  </option>
+<option value="باكستان"> باكستان  </option>
+<option value="برمودا"> برمودا  </option>
+<option value="بروناي"> بروناي  </option>
+<option value="بلجيكا"> بلجيكا  </option>
+<option value="بلغاريا"> بلغاريا  </option>
+<option value="بليز"> بليز  </option>
+<option value="بنجلادش"> بنجلادش  </option>
+<option value="بنما"> بنما  </option>
+<option value="بنين(داهومي)"> بنين(داهومي)  </option>
+<option value="بوتسوانا"> بوتسوانا  </option>
+<option value="بوتوريكو"> بوتوريكو  </option>
+<option value="بوركينافاسو"> بوركينافاسو  </option>
+<option value="بورما"> بورما  </option>
+<option value="بوروندي"> بوروندي  </option>
+<option value="بولندا"> بولندا  </option>
+<option value="بوليفيا"> بوليفيا  </option>
+<option value="بيرو"> بيرو  </option>
+<option value="بيلاروسيا"> بيلاروسيا  </option>
+<option value="تايلاند"> تايلاند  </option>
+<option value="تايوان"> تايوان  </option>
+<option value="تركمانستان"> تركمانستان  </option>
+<option value="تركيا"> تركيا  </option>
+<option value="ترينيداد وتوباغو"> ترينيداد وتوباغو  </option>
+<option value="تشاد"> تشاد  </option>
+<option value="توجو"> توجو  </option>
+<option value="تونجا"> تونجا  </option>
+<option value="تونس"> تونس  </option>
+<option value="جابون"> جابون  </option>
+<option value="جامايكا"> جامايكا  </option>
+<option value="جاميبا"> جاميبا  </option>
+<option value="جرينادا"> جرينادا  </option>
+<option value="جزر البهاما"> جزر البهاما  </option>
+<option value="جزر الرأس الأخضر"> جزر الرأس الأخضر  </option>
+<option value="جزر السولومون"> جزر السولومون  </option>
+<option value="جزر القمر"> جزر القمر  </option>
+<option value="جزر الكناري"> جزر الكناري  </option>
+<option value="جزر المالديف"> جزر المالديف  </option>
+<option value="جمهورية افريقيا الوسطى"> جمهورية افريقيا الوسطى  </option>
+<option value="جمهورية التشيك"> جمهورية التشيك  </option>
+<option value="جمهورية السودان"> جمهورية السودان  </option>
+<option value="جمهورية تشيلي"> جمهورية تشيلي  </option>
+<option value="جمهورية تنزانيا الاتحادية"> جمهورية تنزانيا الاتحادية  </option>
+<option value="جنوب أفريقيا"> جنوب أفريقيا  </option>
+<option value="جواتيمالا"> جواتيمالا  </option>
+<option value="جورجيا"> جورجيا  </option>
+<option value="جيانا"> جيانا  </option>
+<option value="جيبوتي"> جيبوتي  </option>
+<option value="دولة الفاتيكان"> دولة الفاتيكان  </option>
+<option value="دومينيكان"> دومينيكان  </option>
+<option value="رواندا"> رواندا  </option>
+<option value="روسيا"> روسيا  </option>
+<option value="رومانيا"> رومانيا  </option>
+<option value="زائير"> زائير  </option>
+<option value="زامبيا"> زامبيا  </option>
+<option value="زيمبابوي"> زيمبابوي  </option>
+<option value="ساحل العاج"> ساحل العاج  </option>
+<option value="ساوتومي وبرنسيبي"> ساوتومي وبرنسيبي  </option>
+<option value="سـلطنة عمان"> سـلطنة عمان  </option>
+<option value="سلوفاكيا"> سلوفاكيا  </option>
+<option value="سلوفينيا"> سلوفينيا  </option>
+<option value="سنغافورة"> سنغافورة  </option>
+<option value="سوازيلند"> سوازيلند  </option>
+<option value="سوريا"> سوريا  </option>
+<option value="سورينام"> سورينام  </option>
+<option value="سويسرا"> سويسرا  </option>
+<option value="سيراليون"> سيراليون  </option>
+<option value="سيريلانكا(سيلان)"> سيريلانكا(سيلان)  </option>
+<option value="سيشل"> سيشل  </option>
+<option value="صربيا"> صربيا  </option>
+<option value="طاجاكستان"> طاجاكستان  </option>
+<option value="غانا"> غانا  </option>
+<option value="غرينلاند"> غرينلاند  </option>
+<option value="غوام"> غوام  </option>
+<option value="غيانا الفرنسية"> غيانا الفرنسية  </option>
+<option value="غير معرف"> غير معرف  </option>
+<option value="غينيا"> غينيا  </option>
+<option value="غينيا الاستوائيه"> غينيا الاستوائيه  </option>
+<option value="غينيا الجديده"> غينيا الجديده  </option>
+<option value="غينيا بيساو"> غينيا بيساو  </option>
+<option value="فرنسا"> فرنسا  </option>
+<option value="فلسطين"> فلسطين  </option>
+<option value="فنزويلا"> فنزويلا  </option>
+<option value="فنلندا"> فنلندا  </option>
+<option value="فيتنام"> فيتنام  </option>
+<option value="فيجي"> فيجي  </option>
+<option value="قبرص"> قبرص  </option>
+<option value="قطر"> قطر  </option>
+<option value="قيرغيزستان"> قيرغيزستان  </option>
+<option value="كازاخستان"> كازاخستان  </option>
+<option value="كرواتيا"> كرواتيا  </option>
+<option value="كمبوديا"> كمبوديا  </option>
+<option value="كندا"> كندا  </option>
+<option value="كوبا"> كوبا  </option>
+<option value="كوريا الجنوبية"> كوريا الجنوبية  </option>
+<option value="كوريا الشماليه"> كوريا الشماليه  </option>
+<option value="كوستاريكا"> كوستاريكا  </option>
+<option value="كوسفا"> كوسفا  </option>
+<option value="كولومبيا"> كولومبيا  </option>
+<option value="كونغو"> كونغو  </option>
+<option value="كينيا"> كينيا  </option>
+<option value="لاتفيا"> لاتفيا  </option>
+<option value="لاوس"> لاوس  </option>
+<option value="لبنان"> لبنان  </option>
+<option value="لكسمبورج"> لكسمبورج  </option>
+<option value="لوسوتو"> لوسوتو  </option>
+<option value="ليبيا"> ليبيا  </option>
+<option value="ليبيريا"> ليبيريا  </option>
+<option value="ليتوانيا"> ليتوانيا  </option>
+<option value="ماكاو"> ماكاو  </option>
+<option value="مالاوي"> مالاوي  </option>
+<option value="مالطا"> مالطا  </option>
+<option value="مالي"> مالي  </option>
+<option value="ماليزيا"> ماليزيا  </option>
+<option value="مدغشقر"> مدغشقر  </option>
+<option value="مصر"> مصر  </option>
+<option value="مقدونيا"> مقدونيا  </option>
+<option value="منغوليا"> منغوليا  </option>
+<option value="موريتانيا"> موريتانيا  </option>
+<option value="موريشيوس"> موريشيوس  </option>
+<option value="موزمبيق"> موزمبيق  </option>
+<option value="مولدوفا"> مولدوفا  </option>
+<option value="موناكو"> موناكو  </option>
+<option value="ميانمار"> ميانمار  </option>
+<option value="ناميبيا"> ناميبيا  </option>
+<option value="نيبال"> نيبال  </option>
+<option value="نيجيريا"> نيجيريا  </option>
+<option value="نيكاراجوا"> نيكاراجوا  </option>
+<option value="نيوزيلاند"> نيوزيلاند  </option>
+<option value="هايتي"> هايتي  </option>
+<option value="هندوراس"> هندوراس  </option>
+<option value="هولندا"> هولندا  </option>
+<option value="هونج كونج"> هونج كونج  </option>
+        </select>
 
-                 <option> السويد </option>
-<option> آيسلندا </option>
-<option> أثيوبيا </option>
-<option> أذربيجان </option>
-<option> أرمينيا </option>
-<option> أسبانيا </option>
-<option> أستونيا </option>
-<option> أفغانستان </option>
-<option> ألبانيا </option>
-<option> ألمانيا </option>
-<option> أنجولا </option>
-<option> أندونيسيا </option>
-<option> أورجواي </option>
-<option> أوزبكستان </option>
-<option> أوغندا </option>
-<option> إريتريا </option>
-<option> إكوادور </option>
-<option> استراليا </option>
-<option> اسرائيل </option>
-<option> اسكتلندا </option>
-<option> الأردن </option>
-<option> الأمارات العربية المتحده </option>
-<option> الارجنتين </option>
-<option> البحرين </option>
-<option> البرازيل </option>
-<option> البرتغال </option>
-<option> البوسنة والهرسك </option>
-<option> الجبل الاسود </option>
-<option> الجزائر </option>
-<option> الدنمارك </option>
-<option> السلفادور </option>
-<option> السنغال </option>
-<option> الصومال </option>
-<option> الصين الشعبيه </option>
-<option> العراق </option>
-<option> الفلبين </option>
-<option> الكاميرون </option>
-<option> الكويت </option>
-<option> المجر </option>
-<option> المغرب </option>
-<option> المكسيك </option>
-<option> المملكة العربية السعودية </option>
-<option> المملكة المتحدة </option>
-<option> النرويج </option>
-<option> النمسا </option>
-<option> النيجر </option>
-<option> الهند </option>
-<option> الولايات المتحدة الأمريكيه </option>
-<option> اليابان </option>
-<option> اليمن </option>
-<option> اليونان </option>
-<option> اوكرانيا </option>
-<option> ايران </option>
-<option> ايرلندا </option>
-<option> ايطاليا </option>
-<option> باراجواي </option>
-<option> باربادوس </option>
-<option> باكستان </option>
-<option> برمودا </option>
-<option> بروناي </option>
-<option> بلجيكا </option>
-<option> بلغاريا </option>
-<option> بليز </option>
-<option> بنجلادش </option>
-<option> بنما </option>
-<option> بنين(داهومي) </option>
-<option> بوتسوانا </option>
-<option> بوتوريكو </option>
-<option> بوركينافاسو </option>
-<option> بورما </option>
-<option> بوروندي </option>
-<option> بولندا </option>
-<option> بوليفيا </option>
-<option> بيرو </option>
-<option> بيلاروسيا </option>
-<option> تايلاند </option>
-<option> تايوان </option>
-<option> تركمانستان </option>
-<option> تركيا </option>
-<option> ترينيداد وتوباغو </option>
-<option> تشاد </option>
-<option> توجو </option>
-<option> تونجا </option>
-<option> تونس </option>
-<option> جابون </option>
-<option> جامايكا </option>
-<option> جاميبا </option>
-<option> جرينادا </option>
-<option> جزر البهاما </option>
-<option> جزر الرأس الأخضر </option>
-<option> جزر السولومون </option>
-<option> جزر القمر </option>
-<option> جزر الكناري </option>
-<option> جزر المالديف </option>
-<option> جمهورية افريقيا الوسطى </option>
-<option> جمهورية التشيك </option>
-<option> جمهورية السودان </option>
-<option> جمهورية تشيلي </option>
-<option> جمهورية تنزانيا الاتحادية </option>
-<option> جنوب أفريقيا </option>
-<option> جواتيمالا </option>
-<option> جورجيا </option>
-<option> جيانا </option>
-<option> جيبوتي </option>
-<option> دولة الفاتيكان </option>
-<option> دومينيكان </option>
-<option> رواندا </option>
-<option> روسيا </option>
-<option> رومانيا </option>
-<option> زائير </option>
-<option> زامبيا </option>
-<option> زيمبابوي </option>
-<option> ساحل العاج </option>
-<option> ساوتومي وبرنسيبي </option>
-<option> سـلطنة عمان </option>
-<option> سلوفاكيا </option>
-<option> سلوفينيا </option>
-<option> سنغافورة </option>
-<option> سوازيلند </option>
-<option> سوريا </option>
-<option> سورينام </option>
-<option> سويسرا </option>
-<option> سيراليون </option>
-<option> سيريلانكا(سيلان) </option>
-<option> سيشل </option>
-<option> صربيا </option>
-<option> طاجاكستان </option>
-<option> غانا </option>
-<option> غرينلاند </option>
-<option> غوام </option>
-<option> غيانا الفرنسية </option>
-<option> غير معرف </option>
-<option> غينيا </option>
-<option> غينيا الاستوائيه </option>
-<option> غينيا الجديده </option>
-<option> غينيا بيساو </option>
-<option> فرنسا </option>
-<option> فلسطين </option>
-<option> فنزويلا </option>
-<option> فنلندا </option>
-<option> فيتنام </option>
-<option> فيجي </option>
-<option> قبرص </option>
-<option> قطر </option>
-<option> قيرغيزستان </option>
-<option> كازاخستان </option>
-<option> كرواتيا </option>
-<option> كمبوديا </option>
-<option> كندا </option>
-<option> كوبا </option>
-<option> كوريا الجنوبية </option>
-<option> كوريا الشماليه </option>
-<option> كوستاريكا </option>
-<option> كوسفا </option>
-<option> كولومبيا </option>
-<option> كونغو </option>
-<option> كينيا </option>
-<option> لاتفيا </option>
-<option> لاوس </option>
-<option> لبنان </option>
-<option> لكسمبورج </option>
-<option> لوسوتو </option>
-<option> ليبيا </option>
-<option> ليبيريا </option>
-<option> ليتوانيا </option>
-<option> ماكاو </option>
-<option> مالاوي </option>
-<option> مالطا </option>
-<option> مالي </option>
-<option> ماليزيا </option>
-<option> مدغشقر </option>
-<option> مصر </option>
-<option> مقدونيا </option>
-<option> منغوليا </option>
-<option> موريتانيا </option>
-<option> موريشيوس </option>
-<option> موزمبيق </option>
-<option> مولدوفا </option>
-<option> موناكو </option>
-<option> ميانمار </option>
-<option> ناميبيا </option>
-<option> نيبال </option>
-<option> نيجيريا </option>
-<option> نيكاراجوا </option>
-<option> نيوزيلاند </option>
-<option> هايتي </option>
-<option> هندوراس </option>
-<option> هولندا </option>
-<option> هونج كونج </option>
-
-              </select>
-
-            </div>
+        </div>
 
         <div class="input-group-reg">
 
@@ -407,7 +549,8 @@
         <input type="text" name="app_birth_dt_hijri" class="input_def" placeholder="  تاريخ الميلاد الهجري" data-order="10">
 
         </div>
-                <div class="input-group-reg">
+
+        <div class="input-group-reg">
 
         <label>الجنس: <i class="fa fa-star"></i></label>
 
@@ -415,21 +558,22 @@
 
         <option value="0" label="أختار .. " selected="selected">أختار .. </option>
 
-        <option value="male" label="أنثى">أنثى</option>
+        <option value="أنثى" label="أنثى">أنثى</option>
 
-        <option value="female" label="ذكر">ذكر</option>
+        <option value="ذكر" label="ذكر">ذكر</option>
 
         </select>
 
         </div>
+
         <div class="input-group-reg">
           <label> الحالة الاجتماعية: <i class="fa fa-star"></i></label>
           <select name="app_martial_status" id="marital_status" class="select_def">
             <option value="0" label="أختار .. " selected="selected">أختار .. </option>
-            <option> أعزب </option>
-            <option> متزوج </option>
-            <option> مطلق </option>
-            <option> أرمل </option>
+            <option value="أعزب "> أعزب </option>
+            <option value="متزوج"> متزوج </option>
+            <option value="مطلق "> مطلق </option>
+            <option value="أرمل "> أرمل </option>
           </select>
         </div>
 
@@ -441,15 +585,16 @@
 
         <option value="0" label="أختار .. " selected="selected">أختار .. </option>
 
-        <option value="mael" label="مسلم">مسلم</option>
+        <option value="مسلم" label="مسلم">مسلم</option>
 
-        <option value="femael" label="مسيحي">مسيحي</option>
+        <option value="مسيحي" label="مسيحي">مسيحي</option>
 
-        <option value="femael" label="آخرى">آخرى</option>
+        <option value="آخرى" label="آخرى">آخرى</option>
 
         </select>
 
         </div>
+
         <div class="input-group-reg">
 
         <label>الجنسية: <i class="fa fa-star"></i></label>
@@ -457,424 +602,430 @@
         <select name="app_nationality" id="nationality" class="select_def">
 
                   <option value="0" label="أختار .. " selected="selected">أختار .. </option>
+<option value="السويد"> السويد  </option>
+<option value="آيسلندا"> آيسلندا  </option>
+<option value="أثيوبيا"> أثيوبيا  </option>
+<option value="أذربيجان"> أذربيجان  </option>
+<option value="أرمينيا"> أرمينيا  </option>
+<option value="أسبانيا"> أسبانيا  </option>
+<option value="أستونيا"> أستونيا  </option>
+<option value="أفغانستان"> أفغانستان  </option>
+<option value="ألبانيا"> ألبانيا  </option>
+<option value="ألمانيا"> ألمانيا  </option>
+<option value="أنجولا"> أنجولا  </option>
+<option value="أندونيسيا"> أندونيسيا  </option>
+<option value="أورجواي"> أورجواي  </option>
+<option value="أوزبكستان"> أوزبكستان  </option>
+<option value="أوغندا"> أوغندا  </option>
+<option value="إريتريا"> إريتريا  </option>
+<option value="إكوادور"> إكوادور  </option>
+<option value="استراليا"> استراليا  </option>
+<option value="اسرائيل"> اسرائيل  </option>
+<option value="اسكتلندا"> اسكتلندا  </option>
+<option value="الأردن"> الأردن  </option>
+<option value="الأمارات العربية المتحده"> الأمارات العربية المتحده  </option>
+<option value="الارجنتين"> الارجنتين  </option>
+<option value="البحرين"> البحرين  </option>
+<option value="البرازيل"> البرازيل  </option>
+<option value="البرتغال"> البرتغال  </option>
+<option value="البوسنة والهرسك"> البوسنة والهرسك  </option>
+<option value="الجبل الاسود"> الجبل الاسود  </option>
+<option value="الجزائر"> الجزائر  </option>
+<option value="الدنمارك"> الدنمارك  </option>
+<option value="السلفادور"> السلفادور  </option>
+<option value="السنغال"> السنغال  </option>
+<option value="الصومال"> الصومال  </option>
+<option value="الصين الشعبيه"> الصين الشعبيه  </option>
+<option value="العراق"> العراق  </option>
+<option value="الفلبين"> الفلبين  </option>
+<option value="الكاميرون"> الكاميرون  </option>
+<option value="الكويت"> الكويت  </option>
+<option value="المجر"> المجر  </option>
+<option value="المغرب"> المغرب  </option>
+<option value="المكسيك"> المكسيك  </option>
+<option value="المملكة العربية السعودية"> المملكة العربية السعودية  </option>
+<option value="المملكة المتحدة"> المملكة المتحدة  </option>
+<option value="النرويج"> النرويج  </option>
+<option value="النمسا"> النمسا  </option>
+<option value="النيجر"> النيجر  </option>
+<option value="الهند"> الهند  </option>
+<option value="الولايات المتحدة الأمريكيه"> الولايات المتحدة الأمريكيه  </option>
+<option value="اليابان"> اليابان  </option>
+<option value="اليمن"> اليمن  </option>
+<option value="اليونان"> اليونان  </option>
+<option value="اوكرانيا"> اوكرانيا  </option>
+<option value="ايران"> ايران  </option>
+<option value="ايرلندا"> ايرلندا  </option>
+<option value="ايطاليا"> ايطاليا  </option>
+<option value="باراجواي"> باراجواي  </option>
+<option value="باربادوس"> باربادوس  </option>
+<option value="باكستان"> باكستان  </option>
+<option value="برمودا"> برمودا  </option>
+<option value="بروناي"> بروناي  </option>
+<option value="بلجيكا"> بلجيكا  </option>
+<option value="بلغاريا"> بلغاريا  </option>
+<option value="بليز"> بليز  </option>
+<option value="بنجلادش"> بنجلادش  </option>
+<option value="بنما"> بنما  </option>
+<option value="بنين(داهومي)"> بنين(داهومي)  </option>
+<option value="بوتسوانا"> بوتسوانا  </option>
+<option value="بوتوريكو"> بوتوريكو  </option>
+<option value="بوركينافاسو"> بوركينافاسو  </option>
+<option value="بورما"> بورما  </option>
+<option value="بوروندي"> بوروندي  </option>
+<option value="بولندا"> بولندا  </option>
+<option value="بوليفيا"> بوليفيا  </option>
+<option value="بيرو"> بيرو  </option>
+<option value="بيلاروسيا"> بيلاروسيا  </option>
+<option value="تايلاند"> تايلاند  </option>
+<option value="تايوان"> تايوان  </option>
+<option value="تركمانستان"> تركمانستان  </option>
+<option value="تركيا"> تركيا  </option>
+<option value="ترينيداد وتوباغو"> ترينيداد وتوباغو  </option>
+<option value="تشاد"> تشاد  </option>
+<option value="توجو"> توجو  </option>
+<option value="تونجا"> تونجا  </option>
+<option value="تونس"> تونس  </option>
+<option value="جابون"> جابون  </option>
+<option value="جامايكا"> جامايكا  </option>
+<option value="جاميبا"> جاميبا  </option>
+<option value="جرينادا"> جرينادا  </option>
+<option value="جزر البهاما"> جزر البهاما  </option>
+<option value="جزر الرأس الأخضر"> جزر الرأس الأخضر  </option>
+<option value="جزر السولومون"> جزر السولومون  </option>
+<option value="جزر القمر"> جزر القمر  </option>
+<option value="جزر الكناري"> جزر الكناري  </option>
+<option value="جزر المالديف"> جزر المالديف  </option>
+<option value="جمهورية افريقيا الوسطى"> جمهورية افريقيا الوسطى  </option>
+<option value="جمهورية التشيك"> جمهورية التشيك  </option>
+<option value="جمهورية السودان"> جمهورية السودان  </option>
+<option value="جمهورية تشيلي"> جمهورية تشيلي  </option>
+<option value="جمهورية تنزانيا الاتحادية"> جمهورية تنزانيا الاتحادية  </option>
+<option value="جنوب أفريقيا"> جنوب أفريقيا  </option>
+<option value="جواتيمالا"> جواتيمالا  </option>
+<option value="جورجيا"> جورجيا  </option>
+<option value="جيانا"> جيانا  </option>
+<option value="جيبوتي"> جيبوتي  </option>
+<option value="دولة الفاتيكان"> دولة الفاتيكان  </option>
+<option value="دومينيكان"> دومينيكان  </option>
+<option value="رواندا"> رواندا  </option>
+<option value="روسيا"> روسيا  </option>
+<option value="رومانيا"> رومانيا  </option>
+<option value="زائير"> زائير  </option>
+<option value="زامبيا"> زامبيا  </option>
+<option value="زيمبابوي"> زيمبابوي  </option>
+<option value="ساحل العاج"> ساحل العاج  </option>
+<option value="ساوتومي وبرنسيبي"> ساوتومي وبرنسيبي  </option>
+<option value="سـلطنة عمان"> سـلطنة عمان  </option>
+<option value="سلوفاكيا"> سلوفاكيا  </option>
+<option value="سلوفينيا"> سلوفينيا  </option>
+<option value="سنغافورة"> سنغافورة  </option>
+<option value="سوازيلند"> سوازيلند  </option>
+<option value="سوريا"> سوريا  </option>
+<option value="سورينام"> سورينام  </option>
+<option value="سويسرا"> سويسرا  </option>
+<option value="سيراليون"> سيراليون  </option>
+<option value="سيريلانكا(سيلان)"> سيريلانكا(سيلان)  </option>
+<option value="سيشل"> سيشل  </option>
+<option value="صربيا"> صربيا  </option>
+<option value="طاجاكستان"> طاجاكستان  </option>
+<option value="غانا"> غانا  </option>
+<option value="غرينلاند"> غرينلاند  </option>
+<option value="غوام"> غوام  </option>
+<option value="غيانا الفرنسية"> غيانا الفرنسية  </option>
+<option value="غير معرف"> غير معرف  </option>
+<option value="غينيا"> غينيا  </option>
+<option value="غينيا الاستوائيه"> غينيا الاستوائيه  </option>
+<option value="غينيا الجديده"> غينيا الجديده  </option>
+<option value="غينيا بيساو"> غينيا بيساو  </option>
+<option value="فرنسا"> فرنسا  </option>
+<option value="فلسطين"> فلسطين  </option>
+<option value="فنزويلا"> فنزويلا  </option>
+<option value="فنلندا"> فنلندا  </option>
+<option value="فيتنام"> فيتنام  </option>
+<option value="فيجي"> فيجي  </option>
+<option value="قبرص"> قبرص  </option>
+<option value="قطر"> قطر  </option>
+<option value="قيرغيزستان"> قيرغيزستان  </option>
+<option value="كازاخستان"> كازاخستان  </option>
+<option value="كرواتيا"> كرواتيا  </option>
+<option value="كمبوديا"> كمبوديا  </option>
+<option value="كندا"> كندا  </option>
+<option value="كوبا"> كوبا  </option>
+<option value="كوريا الجنوبية"> كوريا الجنوبية  </option>
+<option value="كوريا الشماليه"> كوريا الشماليه  </option>
+<option value="كوستاريكا"> كوستاريكا  </option>
+<option value="كوسفا"> كوسفا  </option>
+<option value="كولومبيا"> كولومبيا  </option>
+<option value="كونغو"> كونغو  </option>
+<option value="كينيا"> كينيا  </option>
+<option value="لاتفيا"> لاتفيا  </option>
+<option value="لاوس"> لاوس  </option>
+<option value="لبنان"> لبنان  </option>
+<option value="لكسمبورج"> لكسمبورج  </option>
+<option value="لوسوتو"> لوسوتو  </option>
+<option value="ليبيا"> ليبيا  </option>
+<option value="ليبيريا"> ليبيريا  </option>
+<option value="ليتوانيا"> ليتوانيا  </option>
+<option value="ماكاو"> ماكاو  </option>
+<option value="مالاوي"> مالاوي  </option>
+<option value="مالطا"> مالطا  </option>
+<option value="مالي"> مالي  </option>
+<option value="ماليزيا"> ماليزيا  </option>
+<option value="مدغشقر"> مدغشقر  </option>
+<option value="مصر"> مصر  </option>
+<option value="مقدونيا"> مقدونيا  </option>
+<option value="منغوليا"> منغوليا  </option>
+<option value="موريتانيا"> موريتانيا  </option>
+<option value="موريشيوس"> موريشيوس  </option>
+<option value="موزمبيق"> موزمبيق  </option>
+<option value="مولدوفا"> مولدوفا  </option>
+<option value="موناكو"> موناكو  </option>
+<option value="ميانمار"> ميانمار  </option>
+<option value="ناميبيا"> ناميبيا  </option>
+<option value="نيبال"> نيبال  </option>
+<option value="نيجيريا"> نيجيريا  </option>
+<option value="نيكاراجوا"> نيكاراجوا  </option>
+<option value="نيوزيلاند"> نيوزيلاند  </option>
+<option value="هايتي"> هايتي  </option>
+<option value="هندوراس"> هندوراس  </option>
+<option value="هولندا"> هولندا  </option>
+<option value="هونج كونج"> هونج كونج  </option>
+        </select>
 
-                 <option> السويد </option>
-<option> آيسلندا </option>
-<option> أثيوبيا </option>
-<option> أذربيجان </option>
-<option> أرمينيا </option>
-<option> أسبانيا </option>
-<option> أستونيا </option>
-<option> أفغانستان </option>
-<option> ألبانيا </option>
-<option> ألمانيا </option>
-<option> أنجولا </option>
-<option> أندونيسيا </option>
-<option> أورجواي </option>
-<option> أوزبكستان </option>
-<option> أوغندا </option>
-<option> إريتريا </option>
-<option> إكوادور </option>
-<option> استراليا </option>
-<option> اسرائيل </option>
-<option> اسكتلندا </option>
-<option> الأردن </option>
-<option> الأمارات العربية المتحده </option>
-<option> الارجنتين </option>
-<option> البحرين </option>
-<option> البرازيل </option>
-<option> البرتغال </option>
-<option> البوسنة والهرسك </option>
-<option> الجبل الاسود </option>
-<option> الجزائر </option>
-<option> الدنمارك </option>
-<option> السلفادور </option>
-<option> السنغال </option>
-<option> الصومال </option>
-<option> الصين الشعبيه </option>
-<option> العراق </option>
-<option> الفلبين </option>
-<option> الكاميرون </option>
-<option> الكويت </option>
-<option> المجر </option>
-<option> المغرب </option>
-<option> المكسيك </option>
-<option> المملكة العربية السعودية </option>
-<option> المملكة المتحدة </option>
-<option> النرويج </option>
-<option> النمسا </option>
-<option> النيجر </option>
-<option> الهند </option>
-<option> الولايات المتحدة الأمريكيه </option>
-<option> اليابان </option>
-<option> اليمن </option>
-<option> اليونان </option>
-<option> اوكرانيا </option>
-<option> ايران </option>
-<option> ايرلندا </option>
-<option> ايطاليا </option>
-<option> باراجواي </option>
-<option> باربادوس </option>
-<option> باكستان </option>
-<option> برمودا </option>
-<option> بروناي </option>
-<option> بلجيكا </option>
-<option> بلغاريا </option>
-<option> بليز </option>
-<option> بنجلادش </option>
-<option> بنما </option>
-<option> بنين(داهومي) </option>
-<option> بوتسوانا </option>
-<option> بوتوريكو </option>
-<option> بوركينافاسو </option>
-<option> بورما </option>
-<option> بوروندي </option>
-<option> بولندا </option>
-<option> بوليفيا </option>
-<option> بيرو </option>
-<option> بيلاروسيا </option>
-<option> تايلاند </option>
-<option> تايوان </option>
-<option> تركمانستان </option>
-<option> تركيا </option>
-<option> ترينيداد وتوباغو </option>
-<option> تشاد </option>
-<option> توجو </option>
-<option> تونجا </option>
-<option> تونس </option>
-<option> جابون </option>
-<option> جامايكا </option>
-<option> جاميبا </option>
-<option> جرينادا </option>
-<option> جزر البهاما </option>
-<option> جزر الرأس الأخضر </option>
-<option> جزر السولومون </option>
-<option> جزر القمر </option>
-<option> جزر الكناري </option>
-<option> جزر المالديف </option>
-<option> جمهورية افريقيا الوسطى </option>
-<option> جمهورية التشيك </option>
-<option> جمهورية السودان </option>
-<option> جمهورية تشيلي </option>
-<option> جمهورية تنزانيا الاتحادية </option>
-<option> جنوب أفريقيا </option>
-<option> جواتيمالا </option>
-<option> جورجيا </option>
-<option> جيانا </option>
-<option> جيبوتي </option>
-<option> دولة الفاتيكان </option>
-<option> دومينيكان </option>
-<option> رواندا </option>
-<option> روسيا </option>
-<option> رومانيا </option>
-<option> زائير </option>
-<option> زامبيا </option>
-<option> زيمبابوي </option>
-<option> ساحل العاج </option>
-<option> ساوتومي وبرنسيبي </option>
-<option> سـلطنة عمان </option>
-<option> سلوفاكيا </option>
-<option> سلوفينيا </option>
-<option> سنغافورة </option>
-<option> سوازيلند </option>
-<option> سوريا </option>
-<option> سورينام </option>
-<option> سويسرا </option>
-<option> سيراليون </option>
-<option> سيريلانكا(سيلان) </option>
-<option> سيشل </option>
-<option> صربيا </option>
-<option> طاجاكستان </option>
-<option> غانا </option>
-<option> غرينلاند </option>
-<option> غوام </option>
-<option> غيانا الفرنسية </option>
-<option> غير معرف </option>
-<option> غينيا </option>
-<option> غينيا الاستوائيه </option>
-<option> غينيا الجديده </option>
-<option> غينيا بيساو </option>
-<option> فرنسا </option>
-<option> فلسطين </option>
-<option> فنزويلا </option>
-<option> فنلندا </option>
-<option> فيتنام </option>
-<option> فيجي </option>
-<option> قبرص </option>
-<option> قطر </option>
-<option> قيرغيزستان </option>
-<option> كازاخستان </option>
-<option> كرواتيا </option>
-<option> كمبوديا </option>
-<option> كندا </option>
-<option> كوبا </option>
-<option> كوريا الجنوبية </option>
-<option> كوريا الشماليه </option>
-<option> كوستاريكا </option>
-<option> كوسفا </option>
-<option> كولومبيا </option>
-<option> كونغو </option>
-<option> كينيا </option>
-<option> لاتفيا </option>
-<option> لاوس </option>
-<option> لبنان </option>
-<option> لكسمبورج </option>
-<option> لوسوتو </option>
-<option> ليبيا </option>
-<option> ليبيريا </option>
-<option> ليتوانيا </option>
-<option> ماكاو </option>
-<option> مالاوي </option>
-<option> مالطا </option>
-<option> مالي </option>
-<option> ماليزيا </option>
-<option> مدغشقر </option>
-<option> مصر </option>
-<option> مقدونيا </option>
-<option> منغوليا </option>
-<option> موريتانيا </option>
-<option> موريشيوس </option>
-<option> موزمبيق </option>
-<option> مولدوفا </option>
-<option> موناكو </option>
-<option> ميانمار </option>
-<option> ناميبيا </option>
-<option> نيبال </option>
-<option> نيجيريا </option>
-<option> نيكاراجوا </option>
-<option> نيوزيلاند </option>
-<option> هايتي </option>
-<option> هندوراس </option>
-<option> هولندا </option>
-<option> هونج كونج </option>
+        </div>
+
+        <div class="input-group-reg">
+
+        <label>بلد الاقامة الحالي: <i class="fa fa-star"></i></label>
+
+        <select name="house" id="house" class="select_def">
+
+                          <option value="0" label="أختار .. " selected="selected">أختار .. </option>
+
+<option value="السويد"> السويد  </option>
+<option value="آيسلندا"> آيسلندا  </option>
+<option value="أثيوبيا"> أثيوبيا  </option>
+<option value="أذربيجان"> أذربيجان  </option>
+<option value="أرمينيا"> أرمينيا  </option>
+<option value="أسبانيا"> أسبانيا  </option>
+<option value="أستونيا"> أستونيا  </option>
+<option value="أفغانستان"> أفغانستان  </option>
+<option value="ألبانيا"> ألبانيا  </option>
+<option value="ألمانيا"> ألمانيا  </option>
+<option value="أنجولا"> أنجولا  </option>
+<option value="أندونيسيا"> أندونيسيا  </option>
+<option value="أورجواي"> أورجواي  </option>
+<option value="أوزبكستان"> أوزبكستان  </option>
+<option value="أوغندا"> أوغندا  </option>
+<option value="إريتريا"> إريتريا  </option>
+<option value="إكوادور"> إكوادور  </option>
+<option value="استراليا"> استراليا  </option>
+<option value="اسرائيل"> اسرائيل  </option>
+<option value="اسكتلندا"> اسكتلندا  </option>
+<option value="الأردن"> الأردن  </option>
+<option value="الأمارات العربية المتحده"> الأمارات العربية المتحده  </option>
+<option value="الارجنتين"> الارجنتين  </option>
+<option value="البحرين"> البحرين  </option>
+<option value="البرازيل"> البرازيل  </option>
+<option value="البرتغال"> البرتغال  </option>
+<option value="البوسنة والهرسك"> البوسنة والهرسك  </option>
+<option value="الجبل الاسود"> الجبل الاسود  </option>
+<option value="الجزائر"> الجزائر  </option>
+<option value="الدنمارك"> الدنمارك  </option>
+<option value="السلفادور"> السلفادور  </option>
+<option value="السنغال"> السنغال  </option>
+<option value="الصومال"> الصومال  </option>
+<option value="الصين الشعبيه"> الصين الشعبيه  </option>
+<option value="العراق"> العراق  </option>
+<option value="الفلبين"> الفلبين  </option>
+<option value="الكاميرون"> الكاميرون  </option>
+<option value="الكويت"> الكويت  </option>
+<option value="المجر"> المجر  </option>
+<option value="المغرب"> المغرب  </option>
+<option value="المكسيك"> المكسيك  </option>
+<option value="المملكة العربية السعودية"> المملكة العربية السعودية  </option>
+<option value="المملكة المتحدة"> المملكة المتحدة  </option>
+<option value="النرويج"> النرويج  </option>
+<option value="النمسا"> النمسا  </option>
+<option value="النيجر"> النيجر  </option>
+<option value="الهند"> الهند  </option>
+<option value="الولايات المتحدة الأمريكيه"> الولايات المتحدة الأمريكيه  </option>
+<option value="اليابان"> اليابان  </option>
+<option value="اليمن"> اليمن  </option>
+<option value="اليونان"> اليونان  </option>
+<option value="اوكرانيا"> اوكرانيا  </option>
+<option value="ايران"> ايران  </option>
+<option value="ايرلندا"> ايرلندا  </option>
+<option value="ايطاليا"> ايطاليا  </option>
+<option value="باراجواي"> باراجواي  </option>
+<option value="باربادوس"> باربادوس  </option>
+<option value="باكستان"> باكستان  </option>
+<option value="برمودا"> برمودا  </option>
+<option value="بروناي"> بروناي  </option>
+<option value="بلجيكا"> بلجيكا  </option>
+<option value="بلغاريا"> بلغاريا  </option>
+<option value="بليز"> بليز  </option>
+<option value="بنجلادش"> بنجلادش  </option>
+<option value="بنما"> بنما  </option>
+<option value="بنين(داهومي)"> بنين(داهومي)  </option>
+<option value="بوتسوانا"> بوتسوانا  </option>
+<option value="بوتوريكو"> بوتوريكو  </option>
+<option value="بوركينافاسو"> بوركينافاسو  </option>
+<option value="بورما"> بورما  </option>
+<option value="بوروندي"> بوروندي  </option>
+<option value="بولندا"> بولندا  </option>
+<option value="بوليفيا"> بوليفيا  </option>
+<option value="بيرو"> بيرو  </option>
+<option value="بيلاروسيا"> بيلاروسيا  </option>
+<option value="تايلاند"> تايلاند  </option>
+<option value="تايوان"> تايوان  </option>
+<option value="تركمانستان"> تركمانستان  </option>
+<option value="تركيا"> تركيا  </option>
+<option value="ترينيداد وتوباغو"> ترينيداد وتوباغو  </option>
+<option value="تشاد"> تشاد  </option>
+<option value="توجو"> توجو  </option>
+<option value="تونجا"> تونجا  </option>
+<option value="تونس"> تونس  </option>
+<option value="جابون"> جابون  </option>
+<option value="جامايكا"> جامايكا  </option>
+<option value="جاميبا"> جاميبا  </option>
+<option value="جرينادا"> جرينادا  </option>
+<option value="جزر البهاما"> جزر البهاما  </option>
+<option value="جزر الرأس الأخضر"> جزر الرأس الأخضر  </option>
+<option value="جزر السولومون"> جزر السولومون  </option>
+<option value="جزر القمر"> جزر القمر  </option>
+<option value="جزر الكناري"> جزر الكناري  </option>
+<option value="جزر المالديف"> جزر المالديف  </option>
+<option value="جمهورية افريقيا الوسطى"> جمهورية افريقيا الوسطى  </option>
+<option value="جمهورية التشيك"> جمهورية التشيك  </option>
+<option value="جمهورية السودان"> جمهورية السودان  </option>
+<option value="جمهورية تشيلي"> جمهورية تشيلي  </option>
+<option value="جمهورية تنزانيا الاتحادية"> جمهورية تنزانيا الاتحادية  </option>
+<option value="جنوب أفريقيا"> جنوب أفريقيا  </option>
+<option value="جواتيمالا"> جواتيمالا  </option>
+<option value="جورجيا"> جورجيا  </option>
+<option value="جيانا"> جيانا  </option>
+<option value="جيبوتي"> جيبوتي  </option>
+<option value="دولة الفاتيكان"> دولة الفاتيكان  </option>
+<option value="دومينيكان"> دومينيكان  </option>
+<option value="رواندا"> رواندا  </option>
+<option value="روسيا"> روسيا  </option>
+<option value="رومانيا"> رومانيا  </option>
+<option value="زائير"> زائير  </option>
+<option value="زامبيا"> زامبيا  </option>
+<option value="زيمبابوي"> زيمبابوي  </option>
+<option value="ساحل العاج"> ساحل العاج  </option>
+<option value="ساوتومي وبرنسيبي"> ساوتومي وبرنسيبي  </option>
+<option value="سـلطنة عمان"> سـلطنة عمان  </option>
+<option value="سلوفاكيا"> سلوفاكيا  </option>
+<option value="سلوفينيا"> سلوفينيا  </option>
+<option value="سنغافورة"> سنغافورة  </option>
+<option value="سوازيلند"> سوازيلند  </option>
+<option value="سوريا"> سوريا  </option>
+<option value="سورينام"> سورينام  </option>
+<option value="سويسرا"> سويسرا  </option>
+<option value="سيراليون"> سيراليون  </option>
+<option value="سيريلانكا(سيلان)"> سيريلانكا(سيلان)  </option>
+<option value="سيشل"> سيشل  </option>
+<option value="صربيا"> صربيا  </option>
+<option value="طاجاكستان"> طاجاكستان  </option>
+<option value="غانا"> غانا  </option>
+<option value="غرينلاند"> غرينلاند  </option>
+<option value="غوام"> غوام  </option>
+<option value="غيانا الفرنسية"> غيانا الفرنسية  </option>
+<option value="غير معرف"> غير معرف  </option>
+<option value="غينيا"> غينيا  </option>
+<option value="غينيا الاستوائيه"> غينيا الاستوائيه  </option>
+<option value="غينيا الجديده"> غينيا الجديده  </option>
+<option value="غينيا بيساو"> غينيا بيساو  </option>
+<option value="فرنسا"> فرنسا  </option>
+<option value="فلسطين"> فلسطين  </option>
+<option value="فنزويلا"> فنزويلا  </option>
+<option value="فنلندا"> فنلندا  </option>
+<option value="فيتنام"> فيتنام  </option>
+<option value="فيجي"> فيجي  </option>
+<option value="قبرص"> قبرص  </option>
+<option value="قطر"> قطر  </option>
+<option value="قيرغيزستان"> قيرغيزستان  </option>
+<option value="كازاخستان"> كازاخستان  </option>
+<option value="كرواتيا"> كرواتيا  </option>
+<option value="كمبوديا"> كمبوديا  </option>
+<option value="كندا"> كندا  </option>
+<option value="كوبا"> كوبا  </option>
+<option value="كوريا الجنوبية"> كوريا الجنوبية  </option>
+<option value="كوريا الشماليه"> كوريا الشماليه  </option>
+<option value="كوستاريكا"> كوستاريكا  </option>
+<option value="كوسفا"> كوسفا  </option>
+<option value="كولومبيا"> كولومبيا  </option>
+<option value="كونغو"> كونغو  </option>
+<option value="كينيا"> كينيا  </option>
+<option value="لاتفيا"> لاتفيا  </option>
+<option value="لاوس"> لاوس  </option>
+<option value="لبنان"> لبنان  </option>
+<option value="لكسمبورج"> لكسمبورج  </option>
+<option value="لوسوتو"> لوسوتو  </option>
+<option value="ليبيا"> ليبيا  </option>
+<option value="ليبيريا"> ليبيريا  </option>
+<option value="ليتوانيا"> ليتوانيا  </option>
+<option value="ماكاو"> ماكاو  </option>
+<option value="مالاوي"> مالاوي  </option>
+<option value="مالطا"> مالطا  </option>
+<option value="مالي"> مالي  </option>
+<option value="ماليزيا"> ماليزيا  </option>
+<option value="مدغشقر"> مدغشقر  </option>
+<option value="مصر"> مصر  </option>
+<option value="مقدونيا"> مقدونيا  </option>
+<option value="منغوليا"> منغوليا  </option>
+<option value="موريتانيا"> موريتانيا  </option>
+<option value="موريشيوس"> موريشيوس  </option>
+<option value="موزمبيق"> موزمبيق  </option>
+<option value="مولدوفا"> مولدوفا  </option>
+<option value="موناكو"> موناكو  </option>
+<option value="ميانمار"> ميانمار  </option>
+<option value="ناميبيا"> ناميبيا  </option>
+<option value="نيبال"> نيبال  </option>
+<option value="نيجيريا"> نيجيريا  </option>
+<option value="نيكاراجوا"> نيكاراجوا  </option>
+<option value="نيوزيلاند"> نيوزيلاند  </option>
+<option value="هايتي"> هايتي  </option>
+<option value="هندوراس"> هندوراس  </option>
+<option value="هولندا"> هولندا  </option>
+<option value="هونج كونج"> هونج كونج  </option>
 
         </select>
 
         </div>
-            <div class="input-group-reg">
 
-              <label>بلد الاقامة الحالي: <i class="fa fa-star"></i></label>
+        <div class="input-group-reg">
 
-              <select name="house" id="house" class="select_def">
+        <label> البريد الإلكتروني: <i class="fa fa-star"></i></label>
 
-                  <option value="0" label="أختار .. " selected="selected">أختار .. </option>
+        <input type="email" name="app_email" class="input_def" placeholder="البريد الإلكتروني" data-order="11">
 
-                 <option> السويد </option>
-<option> آيسلندا </option>
-<option> أثيوبيا </option>
-<option> أذربيجان </option>
-<option> أرمينيا </option>
-<option> أسبانيا </option>
-<option> أستونيا </option>
-<option> أفغانستان </option>
-<option> ألبانيا </option>
-<option> ألمانيا </option>
-<option> أنجولا </option>
-<option> أندونيسيا </option>
-<option> أورجواي </option>
-<option> أوزبكستان </option>
-<option> أوغندا </option>
-<option> إريتريا </option>
-<option> إكوادور </option>
-<option> استراليا </option>
-<option> اسرائيل </option>
-<option> اسكتلندا </option>
-<option> الأردن </option>
-<option> الأمارات العربية المتحده </option>
-<option> الارجنتين </option>
-<option> البحرين </option>
-<option> البرازيل </option>
-<option> البرتغال </option>
-<option> البوسنة والهرسك </option>
-<option> الجبل الاسود </option>
-<option> الجزائر </option>
-<option> الدنمارك </option>
-<option> السلفادور </option>
-<option> السنغال </option>
-<option> الصومال </option>
-<option> الصين الشعبيه </option>
-<option> العراق </option>
-<option> الفلبين </option>
-<option> الكاميرون </option>
-<option> الكويت </option>
-<option> المجر </option>
-<option> المغرب </option>
-<option> المكسيك </option>
-<option> المملكة العربية السعودية </option>
-<option> المملكة المتحدة </option>
-<option> النرويج </option>
-<option> النمسا </option>
-<option> النيجر </option>
-<option> الهند </option>
-<option> الولايات المتحدة الأمريكيه </option>
-<option> اليابان </option>
-<option> اليمن </option>
-<option> اليونان </option>
-<option> اوكرانيا </option>
-<option> ايران </option>
-<option> ايرلندا </option>
-<option> ايطاليا </option>
-<option> باراجواي </option>
-<option> باربادوس </option>
-<option> باكستان </option>
-<option> برمودا </option>
-<option> بروناي </option>
-<option> بلجيكا </option>
-<option> بلغاريا </option>
-<option> بليز </option>
-<option> بنجلادش </option>
-<option> بنما </option>
-<option> بنين(داهومي) </option>
-<option> بوتسوانا </option>
-<option> بوتوريكو </option>
-<option> بوركينافاسو </option>
-<option> بورما </option>
-<option> بوروندي </option>
-<option> بولندا </option>
-<option> بوليفيا </option>
-<option> بيرو </option>
-<option> بيلاروسيا </option>
-<option> تايلاند </option>
-<option> تايوان </option>
-<option> تركمانستان </option>
-<option> تركيا </option>
-<option> ترينيداد وتوباغو </option>
-<option> تشاد </option>
-<option> توجو </option>
-<option> تونجا </option>
-<option> تونس </option>
-<option> جابون </option>
-<option> جامايكا </option>
-<option> جاميبا </option>
-<option> جرينادا </option>
-<option> جزر البهاما </option>
-<option> جزر الرأس الأخضر </option>
-<option> جزر السولومون </option>
-<option> جزر القمر </option>
-<option> جزر الكناري </option>
-<option> جزر المالديف </option>
-<option> جمهورية افريقيا الوسطى </option>
-<option> جمهورية التشيك </option>
-<option> جمهورية السودان </option>
-<option> جمهورية تشيلي </option>
-<option> جمهورية تنزانيا الاتحادية </option>
-<option> جنوب أفريقيا </option>
-<option> جواتيمالا </option>
-<option> جورجيا </option>
-<option> جيانا </option>
-<option> جيبوتي </option>
-<option> دولة الفاتيكان </option>
-<option> دومينيكان </option>
-<option> رواندا </option>
-<option> روسيا </option>
-<option> رومانيا </option>
-<option> زائير </option>
-<option> زامبيا </option>
-<option> زيمبابوي </option>
-<option> ساحل العاج </option>
-<option> ساوتومي وبرنسيبي </option>
-<option> سـلطنة عمان </option>
-<option> سلوفاكيا </option>
-<option> سلوفينيا </option>
-<option> سنغافورة </option>
-<option> سوازيلند </option>
-<option> سوريا </option>
-<option> سورينام </option>
-<option> سويسرا </option>
-<option> سيراليون </option>
-<option> سيريلانكا(سيلان) </option>
-<option> سيشل </option>
-<option> صربيا </option>
-<option> طاجاكستان </option>
-<option> غانا </option>
-<option> غرينلاند </option>
-<option> غوام </option>
-<option> غيانا الفرنسية </option>
-<option> غير معرف </option>
-<option> غينيا </option>
-<option> غينيا الاستوائيه </option>
-<option> غينيا الجديده </option>
-<option> غينيا بيساو </option>
-<option> فرنسا </option>
-<option> فلسطين </option>
-<option> فنزويلا </option>
-<option> فنلندا </option>
-<option> فيتنام </option>
-<option> فيجي </option>
-<option> قبرص </option>
-<option> قطر </option>
-<option> قيرغيزستان </option>
-<option> كازاخستان </option>
-<option> كرواتيا </option>
-<option> كمبوديا </option>
-<option> كندا </option>
-<option> كوبا </option>
-<option> كوريا الجنوبية </option>
-<option> كوريا الشماليه </option>
-<option> كوستاريكا </option>
-<option> كوسفا </option>
-<option> كولومبيا </option>
-<option> كونغو </option>
-<option> كينيا </option>
-<option> لاتفيا </option>
-<option> لاوس </option>
-<option> لبنان </option>
-<option> لكسمبورج </option>
-<option> لوسوتو </option>
-<option> ليبيا </option>
-<option> ليبيريا </option>
-<option> ليتوانيا </option>
-<option> ماكاو </option>
-<option> مالاوي </option>
-<option> مالطا </option>
-<option> مالي </option>
-<option> ماليزيا </option>
-<option> مدغشقر </option>
-<option> مصر </option>
-<option> مقدونيا </option>
-<option> منغوليا </option>
-<option> موريتانيا </option>
-<option> موريشيوس </option>
-<option> موزمبيق </option>
-<option> مولدوفا </option>
-<option> موناكو </option>
-<option> ميانمار </option>
-<option> ناميبيا </option>
-<option> نيبال </option>
-<option> نيجيريا </option>
-<option> نيكاراجوا </option>
-<option> نيوزيلاند </option>
-<option> هايتي </option>
-<option> هندوراس </option>
-<option> هولندا </option>
-<option> هونج كونج </option>
+        </div>
 
-              </select>
+        <div class="input-group-reg">
 
-            </div>
+        <label> تأكيد البريد الإلكتروني: <i class="fa fa-star"></i></label>
 
-            <div class="input-group-reg">
+        <input type="email" name="app_email_confirm" class="input_def" placeholder="تأكيد البريد الإلكتروني" data-order="12">
 
-              <label> البريد الإلكتروني: <i class="fa fa-star"></i></label>
+        </div>
 
-              <input type="email" name="app_email" class="input_def" placeholder="البريد الإلكتروني" data-order="11">
+        <div class="input-group-reg">
 
-            </div>
+        <label>  رقم الجوال : <i class="fa fa-star"></i></label>
 
-            <div class="input-group-reg">
+        <input type="text" name="app_mobile" class="input_def" placeholder="رقم الجوال " data-order="13">
 
-              <label> تأكيد البريد الإلكتروني: <i class="fa fa-star"></i></label>
+        </div>
 
-              <input type="email" name="app_email_confirm" class="input_def" placeholder="تأكيد البريد الإلكتروني" data-order="12">
+     </form>
 
-            </div>
-
-
-          </form>   
-
-      </div>  
-
-</div>
+  </div>
+ </div>
+                          
 
                           
 
@@ -994,13 +1145,13 @@
 
         <form id="LoginForm" >
 
-          <div class="input-group-reg">
+          <!-- <div class="input-group-reg">
 
             <label>الدولة: <i class="fa fa-star"></i></label>
 
-            <input type="text" class="input_def" placeholder="الدولة"/>
+            <input type="text" name="" class="input_def" placeholder="الدولة"/>
 
-          </div>
+          </div> -->
 
           <div class="input-group-reg">
 
@@ -1048,7 +1199,6 @@
 
     
 
-<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 
 <script src="js/jquery.validate.min.js" type="text/javascript"></script>
 

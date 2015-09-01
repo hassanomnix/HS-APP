@@ -177,7 +177,7 @@ $(document).ready(function(){
   }
 
   $('.undo').click(function(){
-    window.location.href = "reg_from.html";
+    window.location.href = localStorage.getItem('page');
   });
 
   $('.submit_form').click(function(){
