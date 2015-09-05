@@ -220,15 +220,11 @@
 
 
 
-		     <div class="navbarpages">
-
-			     <div class="navbar_home_link"><a href="index.html"><i class="fa fa-home fa-2x"></i></a></div>
-
-				<div class="navbar_page_logo"><img src="img/header_logo.png" height="35"></div>
-
-				<div class="menu_open_icon_white"><a href="#" class="open-panel"><img src="images/menu_open.png" alt="" title=""></a></div>
-
-	     	</div>
+ <div class="navbarpages">
+      <div class="navbar_home_link"><a  onclick="home" class="indexhref"><i class="fa fa-home fa-2x" ></i></a></div>
+      <div class="navbar_page_logo"><img src="img/header_logo.png" height="35"></div>
+      <a class="back" href="#" onclick="goBack()" style="color:#fff"><i class="fa fa-chevron-left"></i></a>
+</div>
 
 
 
@@ -1209,7 +1205,15 @@
 </div>
 
 
-
+    <script type="text/javascript">
+    function goBack() {
+        window.history.back();
+    }
+      function home() {
+    window.location.href = "index.html";
+    }
+  
+    </script>
 
 
 <script src="js/jquery.validate.min.js" type="text/javascript"></script>

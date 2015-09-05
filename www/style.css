@@ -551,18 +551,32 @@ line-height:40px;
 opacity: 1;
 background: #fff;
 }
+
 a.swiper_read_reg{
 color:#fff;
 border:1px solid #229F67;
 padding-top: 11px;
-padding-right: 30px;
 padding-bottom: 5px;
-padding-left: 30px;
 text-decoration:none;
-margin:30px 0 0 0;
+margin:20px 0 0 0;
 display:inline-block;
 font-size:15px;
 background-color: #229F67;
+width: 40%;
+height: 30px;
+}
+a.activate_btn{
+color:darkgreen;
+border:1px solid #229F67;
+padding-top: 11px;
+padding-bottom: 5px;
+text-decoration:none;
+margin:20px 0 0 0;
+display:inline-block;
+font-size:15px;
+background-color: #FFD04B;
+width: 40%;
+height: 30px;
 }
 .fa-lg{
   margin-left: 8px;
@@ -573,14 +587,14 @@ a.swiper_read_log{
 color:#fff;
 border:1px solid #229F67;
 padding-top: 11px;
-padding-right: 33px;
 padding-bottom: 5px;
-padding-left: 33px;
 text-decoration:none;
-margin:30px 0 0 0;
+margin:20px 0 0 0;
 display:inline-block;
 font-size:15px;
 background-color: #229F67;
+width: 40%;
+height: 30px;
 }
 /*===============================================*/
 /* 8. LISTS */
